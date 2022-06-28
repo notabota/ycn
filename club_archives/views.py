@@ -1,8 +1,12 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from os import walk
 
 
 def index(request, year):
+    if year > 2022 or year < 2019:
+        return HttpResponseNotFound("Dude")
+
     images_path = 'static/club_archives/img/activities/' + str(year)
 
     images_list = list(map(lambda x: f'club_archives/img/activities/{year}/{x}',
